@@ -1,0 +1,383 @@
+﻿<Window x:Class="Draw_Slopes.SlopeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Slope Draw Utility" Height="560" Width="890"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent" 
+        ToolTipService.InitialShowDelay="1000">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" CornerRadius="0" GlassFrameThickness="0" ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="4" Padding="10,5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#505050"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#007ACC"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#252526"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#3F3F46"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="MainBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="MainBorder" Property="Opacity" Value="0.4"/>
+                                <Setter TargetName="MainBorder" Property="Background" Value="#151515"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#DDDDDD"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Border x:Name="checkBoxBorder" Width="18" Height="18" CornerRadius="3" BorderThickness="1" BorderBrush="#666" Background="#252526" Margin="0,0,8,0">
+                                <Path x:Name="checkMark" Data="M 3,9 L 7,13 L 14,4" Stroke="#007ACC" StrokeThickness="2" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="checkMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="#007ACC"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="#252526"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ComboBoxItem">
+                                    <Border x:Name="bd" Background="{TemplateBinding Background}" Padding="5">
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bd" Property="Background" Value="#007ACC"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="bd" Property="Background" Value="#005A9E"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid x:Name="MainGrid">
+                            <ToggleButton Name="ToggleButton" Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="20" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="3" Background="#252526" BorderBrush="#3F3F46" BorderThickness="1" />
+                                            <Path x:Name="Arrow" Grid.Column="1" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M0,0 L10,0 L5,5 z" />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="Border" Property="Background" Value="#151515"/>
+                                                <Setter TargetName="Arrow" Property="Fill" Value="#555"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding ItemTemplate}" Margin="6,3,23,3" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="#252526" BorderThickness="1" BorderBrush="#3F3F46"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="MainGrid" Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernGroup" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#3F3F46"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#202020"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Border BorderBrush="#007ACC" BorderThickness="1" CornerRadius="15" Background="#232323" Margin="20">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
+        </Border.Effect>
+        <Grid ClipToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="#373737" CornerRadius="14,14,0,0" MouseLeftButtonDown="TitleBar_MouseDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="45"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Slope Draw Utility" Foreground="White" FontWeight="Bold" Margin="15,0,0,0" VerticalAlignment="Center"/>
+
+                    <Button Grid.Column="2" Content="✕" Click="BtnCancel_Click" Background="Transparent" Foreground="#999" FontSize="14" BorderThickness="0" ToolTip="Close Application">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="btnBorder" Background="Transparent" CornerRadius="0,14,0,0">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="btnBorder" Property="Background" Value="#C42B1C"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="380"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="SETTINGS" FontWeight="Bold" Foreground="#007ACC" Margin="5,0,0,5"/>
+                    <Border Style="{StaticResource ModernGroup}">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Hatch Pattern Step (m)"/>
+                                <TextBox x:Name="txtStep" Grid.Column="1" Text="2.0" ToolTip="Distance between slope lines (meters)"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Offset from Toe (m)"/>
+                                <TextBox x:Name="txtOffset" Grid.Column="1" Text="0.0" ToolTip="Distance from the bottom/toe of the slope"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Short stroke length (%)"/>
+                                <TextBox x:Name="txtRatio" Grid.Column="1" Text="50" ToolTip="Length percentage of the shorter slope lines"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="140"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Short stroke type"/>
+                                <ComboBox x:Name="cmbLengthType" Grid.Column="1" Height="28" ToolTip="Method to calculate short stroke length"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="OPTIONS" FontWeight="Bold" Foreground="#007ACC" Margin="5,10,0,5"/>
+                    <Border Style="{StaticResource ModernGroup}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <CheckBox x:Name="chkIs3D" Content="3D Slope Lines" IsChecked="True" ToolTip="Draw lines with Z-coordinates"/>
+                                    <CheckBox x:Name="chkGroup" Content="Group Objects" IsChecked="True" ToolTip="Groups all lines into a single block"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="chkWipeout" Content="Bckgr. Hatch" ToolTip="Adds a background mask (wipeout) under the slope lines"/>
+                                        <Border x:Name="borderHatchColor" Width="18" Height="18" Margin="10,0,0,0" Background="Gray" CornerRadius="3" MouseUp="BorderHatchColor_MouseUp" Cursor="Hand" BorderThickness="1" BorderBrush="#555" ToolTip="Select background hatch color"/>
+                                    </StackPanel>
+                                    <CheckBox x:Name="chkThin" Content="Curtain Mode" ToolTip="Draws small circles in front of the short lines like a curtain"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <CheckBox x:Name="chkAutoOrient" Content="Auto Cut/Fill Orientation" Margin="0,5,0,0" ToolTip="Automatically determines cut or fill direction based on elevation"/>
+
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Calculation Method:"/>
+                                <ComboBox x:Name="cmbMethod" Grid.Column="1" Margin="62,0,0,0" Height="28" ToolTip="Algorithm used for generating slope lines"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <Grid Grid.Column="1" Margin="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="APPEARANCE" FontWeight="Bold" Foreground="#007ACC" Margin="5,0,0,5"/>
+                        <Border Style="{StaticResource ModernGroup}">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Choose From Layers:" Width="150"/>
+                                    <ComboBox x:Name="cmbLayers" Grid.Column="1" Height="28" ToolTip="Select an existing AutoCAD layer">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border Width="14" Height="14" CornerRadius="2" Margin="0,0,8,0" Background="{Binding ColorBrush}" BorderThickness="1" BorderBrush="#555"/>
+                                                    <TextBlock Text="{Binding Name}" Foreground="White"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="100*"/>
+                                        <ColumnDefinition Width="61*"/>
+                                        <ColumnDefinition Width="85"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="chkCreateNewLayer" Content="Create New Layer" VerticalAlignment="Center" ToolTip="Check to create a new layer for output"/>
+                                    <TextBox x:Name="txtLayer" Grid.Column="1" Text="C-TOPO-SLOPE" Margin="0,0,40,0" VerticalAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=chkCreateNewLayer}" ToolTip="Name of the new layer to be created" Grid.ColumnSpan="3" Height="28"/>
+
+                                    <Border x:Name="borderColor" Grid.Column="3" Background="Red" CornerRadius="3" 
+                                            BorderThickness="1" BorderBrush="#555" Cursor="Hand" MouseUp="BorderColor_MouseUp" 
+                                            ToolTip="Click to change slope line color" Margin="50,0,0,0">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter Property="Opacity" Value="0.4"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                        <TextBlock Text="PREVIEW" FontWeight="Bold" Foreground="#007ACC" Margin="5,0,0,5"/>
+                        <Border Style="{StaticResource ModernGroup}" Height="225" Background="#1A1A1A" BorderBrush="#007ACC" BorderThickness="1" Padding="0" ToolTip="Live preview of the slope style">
+                            <Canvas x:Name="previewCanvas" ClipToBounds="True"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Content="Cancel" Width="100" Height="35" Margin="0,0,10,0" Background="#444444" Click="BtnCancel_Click" ToolTip="Cancel and close window"/>
+                    <Button Grid.Column="2" Content="Draw Slope" Width="150" Height="35" Margin="0,0,10,0" Background="#007ACC" FontWeight="Bold" Click="BtnDraw_Click" ToolTip="Generate slope lines in AutoCAD"/>
+                    <Button Grid.Column="3" Content="Delete" Width="100" Height="35" Background="#C42B1C" Click="BtnDelete_Click" ToolTip="Quickly select and delete objects"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

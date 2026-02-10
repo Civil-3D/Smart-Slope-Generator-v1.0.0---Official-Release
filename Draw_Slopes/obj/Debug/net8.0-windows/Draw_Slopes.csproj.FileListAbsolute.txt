@@ -1,0 +1,17 @@
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\bin\Debug\net8.0-windows\Draw_Slopes.deps.json
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\bin\Debug\net8.0-windows\Draw_Slopes.dll
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\bin\Debug\net8.0-windows\Draw_Slopes.pdb
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.csproj.AssemblyReference.cache
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.AssemblyInfoInputs.cache
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.AssemblyInfo.cs
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.csproj.CoreCompileInputs.cache
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.dll
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\refint\Draw_Slopes.dll
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.pdb
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\ref\Draw_Slopes.dll
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\bin\Debug\net8.0-windows\Draw_Slopes.dll.config
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\SlopeWindow.baml
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\SlopeWindow.g.cs
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes_MarkupCompile.cache
+C:\Users\BEKA\source\repos\Draw_Slopes\Draw_Slopes\obj\Debug\net8.0-windows\Draw_Slopes.g.resources
