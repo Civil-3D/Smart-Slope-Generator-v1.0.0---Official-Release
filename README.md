@@ -1,62 +1,60 @@
-Smart Slope Generator (AutoCAD / Civil 3D) ⛰️
-A highly dynamic, UI-driven plugin for AutoCAD and Civil 3D designed to generate professional slope patterns, hatches, and Tapered lines (triangles) with ease. Created to streamline workflows for Civil Engineers and infrastructure designers.
+# Smart Slope Generator (AutoCAD / Civil 3D) ⛰️
 
-✨ Key Features
-Dynamic Visual JIG: Real-time preview of slope lines as you move your mouse, ensuring perfect placement before clicking.
+A highly dynamic, UI-driven plugin for AutoCAD and Civil 3D designed to generate professional slope patterns, hatches, and Tapered lines (triangles) with ease. Created to streamline workflows for Civil Engineers and infrastructure designers, especially for large-scale master plans and road design projects.
 
-Elastic & Proportional Distribution: Smart algorithm distributes lines proportionally, preventing crossing or overlapping on sharp internal corners or steep terrain.
+<img width="638" height="415" alt="Screenshot 2026-02-22 144637" src="https://github.com/user-attachments/assets/791bc73b-281d-4313-ab7e-4148afce4e5c" />
 
-Multiple Professional Styles:
+---
 
-Fixed Length: Standard uniform patterns.
+## ✨ Key Features
 
-Long / 1 Short: Classic slope representation.
+* **Dynamic Visual JIG:** Real-time preview of slope lines as you move your mouse, ensuring perfect placement and visual feedback before final execution.
+* **Elastic & Proportional Distribution:** A smart algorithm that distributes lines proportionally along the selected path, effectively preventing crossing or overlapping on sharp internal corners or steep terrain.
+* **Multiple Professional Styles:**
+    * **Fixed Length:** Standard uniform patterns for general use.
+    * **Long / 1 Short:** Classic slope representation.
+    * **Long / 2 Shorts:** European standard style for detailed engineering drawings.
+* **Advanced Ending Types:** Professional markers for short lines, including **Circles** and **T-Shape Ticks**.
+* **Tapered Triangles:** A specialized option to draw long slope lines as solid **Civil 3D style triangles**, perfect for clean and modern master plans.
+* **Auto Cut/Fill Detection:** Automatically senses elevation (Z-axis) differences between the Crest and Toe lines to orient the pattern correctly downwards.
+* **Settings Persistence:** The plugin remembers your last-used layers, colors, styles, and ratios, making your next session faster and more consistent.
+* **Wipeout Background:** Automatically generates a background hatch mask to maintain drawing clarity even over complex underlying topography.
 
-Long / 2 Shorts: European standard style.
+---
 
-Advanced Ending Types: Professional markers for short lines, including Circles and T-Shape Ticks.
+## 🚀 Installation
 
-Tapered Triangles: Option to draw long slope lines as solid Civil 3D style triangles for clean master plans.
+### Option 1: MSI Installer (Recommended)
+1. Download the latest **`SmartSlopeInstaller.msi`** from the [Releases](https://github.com/Civil-3D/Smart-Slope-Generator-v1.0.0---Official-Release/releases) section.
+2. Run the installer on your machine. It will automatically place the plugin in the correct Autodesk ApplicationPlugins folder.
+3. Restart AutoCAD or Civil 3D. The plugin will be loaded automatically!
 
-Auto Cut/Fill Detection: Automatically senses elevation (Z-axis) differences between Crest and Toe to orient the pattern correctly downwards.
+### Option 2: Manual Load (Portable)
+1. Download the **`Draw_Slopes.dll`** file from the latest release.
+2. In AutoCAD / Civil 3D, type the **`NETLOAD`** command.
+3. Browse and select the downloaded `.dll` file.
 
-Settings Persistence: Remembers your last-used layers, colors, and styles for your next session.
+---
 
-Wipeout Background: Generates a background hatch mask to maintain clarity over complex underlying topography.
+## 🛠️ Usage
 
-🚀 Installation
-Option 1: MSI Installer (Recommended)
-Download the latest SmartSlopeInstaller.msi from the Releases section.
+1. **Launch:** Type the command **`DRAWSLOPE`** in the command line.
+2. **Configure:** A modern UI window will pop up. Select your preferred settings (Step, Ratio, Style, Layer, Colors).
+3. **Action:** Click the **Draw Slope** button.
+4. **Selection:** * Select the **Top Line (Crest)**.
+    * Select the **Bottom Line (Toe)**.
+5. **Finalize:** Use the dynamic JIG to either select a specific segment or draw along the entire length of the selected curves.
 
-Run the installer. It will automatically place the plugin in the Autodesk ApplicationPlugins folder.
+---
 
-Restart AutoCAD or Civil 3D. The command will be ready to use!
+## 📝 Planned Updates
+* **Auto-Coloring:** Automated color separation based on calculated Cut and Fill values.
+* **Slope Labeling:** Automatic text labeling for gradients (e.g., 1:1.5 or 2%).
 
-Option 2: Manual Load (Portable)
-Download the Draw_Slopes.dll file.
+---
 
-In AutoCAD / Civil 3D, type the NETLOAD command.
+**Author:** [Beka Tchigladze]([https://www.linkedin.com/in/beka-tchigladze-038901146/](https://www.linkedin.com/feed/))  
+**Organization:** [Green Road Group](https://www.greenroadgroup.com.ge](https://www.greenroadgroup.com.ge/))  
+**Educational Resource:** [GeoCourse.ge](https://www.geocourse.ge/courses/autodesk-civil-3d/)
 
-Select the downloaded .dll file.
-
-🛠️ Usage
-Type the command DRAWSLOPE in the command line.
-
-Configure your preferred settings (Step, Ratio, Style, Layer, Colors) in the modern UI window.
-
-Click Draw Slope.
-
-Select the Top Line (Crest).
-
-Select the Bottom Line (Toe).
-
-Use the dynamic JIG to select a segment or draw along the entire length of the lines.
-
-📝 Planned Updates
-Auto-Coloring: Automated color separation based on Cut and Fill values.
-
-Slope Labeling: Automatic text labeling for gradients (e.g., 1:1.5).
-
-Author: Beka Tchigladze
-Organization: Green Road Group
-Supporting infrastructure design workflows since 2018.
+*Supporting infrastructure design workflows with automation and precision.*
