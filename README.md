@@ -51,6 +51,13 @@ A highly dynamic, UI-driven plugin for AutoCAD and Civil 3D designed to generate
 * **Auto-Coloring:** Automated color separation based on calculated Cut and Fill values.
 * **Slope Labeling:** Automatic text labeling for gradients (e.g., 1:1.5 or 2%).
 
+* ---
+
+## 💡 Feedback & Feature Requests
+Have an idea for a new feature or found a bug? 
+Feel free to open an **[Issue](https://github.com/Civil-3D/Smart-Slope-Generator-v1.0.0---Official-Release/issues)** or reach out directly. 
+I am open to community feedback to make this tool even better for infrastructure designers!
+
 ---
 
 **Author:** [Beka Tchigladze]([https://www.linkedin.com/in/beka-tchigladze-038901146/](https://www.linkedin.com/feed/))  
